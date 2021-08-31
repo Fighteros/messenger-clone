@@ -1,16 +1,116 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:messenger_mini_clone/modules/single_chat_screen/SingleChatScreen.dart';
 
 
 class ChatsScreen extends StatelessWidget {
   var screenContext;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     screenContext = context;
     return Scaffold(
+      key: scaffoldKey,
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 50.0,
+        iconSize: 30.0,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.solidComment,
+                ),
+                Container(
+                  width: 18.0,
+                  height: 18.0,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white
+                  ),
+                ),
+                Container(
+                  width: 15.0,
+                  height: 15.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.red
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    end: 2.0,
+                    bottom: 1.0
+                  ),
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Chats',
+
+          ),
+          BottomNavigationBarItem(
+            icon: Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.userFriends,
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 5.0,
+                    bottom: 5.0
+                  ),
+                  child: Container(
+                    width: 24.0,
+                    height: 22.0,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 20.0,
+                  height: 20.0,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.green
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                      end: 1.0,
+                      bottom: 1.0
+                  ),
+                  child: Text(
+                    '66',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'People',
+          ),
+        ],
+      ),
       appBar: AppBar(
         titleSpacing: 16.0,
         elevation: 0.0,
@@ -47,8 +147,7 @@ class ChatsScreen extends StatelessWidget {
                 size: 20.0,
               ),
             ),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
           IconButton(
             iconSize: 40.0,
@@ -121,9 +220,10 @@ class ChatsScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => buildChatItem(),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 10.0,
-                    ),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(
+                          height: 10.0,
+                        ),
                     itemCount: 15),
               ],
             ),
@@ -139,140 +239,142 @@ class ChatsScreen extends StatelessWidget {
   // reusable item
 
 
-  Widget buildChatItem() => GestureDetector(
-    onTap: () {
-      Navigator.push(
-          screenContext,
-          MaterialPageRoute(
-              builder: (screenContext) => SingleChatScreen()));
-    },
-    child: Row(
-      children: [
-        Stack(
-          alignment: AlignmentDirectional.bottomEnd,
+  Widget buildChatItem() =>
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              screenContext,
+              MaterialPageRoute(
+                  builder: (screenContext) => SingleChatScreen()));
+        },
+        child: Row(
           children: [
-            CircleAvatar(
-              radius: 30.0,
-              backgroundImage: NetworkImage(
-                  'https://scontent.fcai20-4.fna.fbcdn.net/v/t1.6435-1/p100x100/129724210_4256347884381296_6719747894575005085_n.jpg?_nc_cat=104&ccb=1-4&_nc_sid=7206a8&_nc_eui2=AeF_MuvjwyGJd2QpyAKVR_iwQf45cPCMVgdB_jlw8IxWBxF4MZ4mr8OETdiRirJkdccVVo_h82bZabz-m-1Tb6X9&_nc_ohc=A2bCapDIVSgAX_yw-Zu&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fcai20-4.fna&oh=8f7a6c0c86f8c7ccbf8accad23d91909&oe=61327122'),
-            ),
-            Padding(
-              padding:
-              const EdgeInsetsDirectional.only(bottom: 1.0, end: 1.0),
-              child: CircleAvatar(
-                radius: 9.5,
-                backgroundColor: Colors.white,
-              ),
-            ),
-            Padding(
-              padding:
-              const EdgeInsetsDirectional.only(bottom: 2.0, end: 2.0),
-              child: CircleAvatar(
-                radius: 8.0,
-                backgroundColor: Colors.green,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: 15.0,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Eng. Mohamed Menem",
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w500,
-              ),
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(
+                      'https://scontent.fcai20-4.fna.fbcdn.net/v/t1.6435-1/p100x100/129724210_4256347884381296_6719747894575005085_n.jpg?_nc_cat=104&ccb=1-4&_nc_sid=7206a8&_nc_eui2=AeF_MuvjwyGJd2QpyAKVR_iwQf45cPCMVgdB_jlw8IxWBxF4MZ4mr8OETdiRirJkdccVVo_h82bZabz-m-1Tb6X9&_nc_ohc=A2bCapDIVSgAX_yw-Zu&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fcai20-4.fna&oh=8f7a6c0c86f8c7ccbf8accad23d91909&oe=61327122'),
+                ),
+                Padding(
+                  padding:
+                  const EdgeInsetsDirectional.only(bottom: 1.0, end: 1.0),
+                  child: CircleAvatar(
+                    radius: 9.5,
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding:
+                  const EdgeInsetsDirectional.only(bottom: 2.0, end: 2.0),
+                  child: CircleAvatar(
+                    radius: 8.0,
+                    backgroundColor: Colors.green,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
-              height: 5.0,
+              width: 15.0,
             ),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                  child: Text(
-                    "You:  ❤يارب يا بشمهندس والله",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    width: 3.0,
-                    height: 3.0,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
                 Text(
-                  "1m",
+                  "Eng. Mohamed Menem",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Text(
+                        "You:  ❤يارب يا بشمهندس والله",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: 3.0,
+                        height: 3.0,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "1m",
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
         ),
-      ],
-    ),
-  );
+      );
 
-  Widget buildStroyItem() => GestureDetector(
-    onTap: () {
-      Navigator.push(
-          screenContext,
-          MaterialPageRoute(
-              builder: (screenContext) => SingleChatScreen()));
-    },
-    child: Container(
-      width: 60.0,
-      child: Column(
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.bottomEnd,
+  Widget buildStroyItem() =>
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              screenContext,
+              MaterialPageRoute(
+                  builder: (screenContext) => SingleChatScreen()));
+        },
+        child: Container(
+          width: 60.0,
+          child: Column(
             children: [
-              CircleAvatar(
-                radius: 30.0,
-                backgroundImage: NetworkImage(
-                    'https://scontent.fcai20-4.fna.fbcdn.net/v/t1.6435-1/p100x100/129724210_4256347884381296_6719747894575005085_n.jpg?_nc_cat=104&ccb=1-4&_nc_sid=7206a8&_nc_eui2=AeF_MuvjwyGJd2QpyAKVR_iwQf45cPCMVgdB_jlw8IxWBxF4MZ4mr8OETdiRirJkdccVVo_h82bZabz-m-1Tb6X9&_nc_ohc=A2bCapDIVSgAX_yw-Zu&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fcai20-4.fna&oh=8f7a6c0c86f8c7ccbf8accad23d91909&oe=61327122'),
+              Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: NetworkImage(
+                        'https://scontent.fcai20-4.fna.fbcdn.net/v/t1.6435-1/p100x100/129724210_4256347884381296_6719747894575005085_n.jpg?_nc_cat=104&ccb=1-4&_nc_sid=7206a8&_nc_eui2=AeF_MuvjwyGJd2QpyAKVR_iwQf45cPCMVgdB_jlw8IxWBxF4MZ4mr8OETdiRirJkdccVVo_h82bZabz-m-1Tb6X9&_nc_ohc=A2bCapDIVSgAX_yw-Zu&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fcai20-4.fna&oh=8f7a6c0c86f8c7ccbf8accad23d91909&oe=61327122'),
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsetsDirectional.only(bottom: 1.0, end: 1.0),
+                    child: CircleAvatar(
+                      radius: 9.5,
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsetsDirectional.only(bottom: 2.0, end: 2.0),
+                    child: CircleAvatar(
+                      radius: 8.0,
+                      backgroundColor: Colors.green,
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding:
-                const EdgeInsetsDirectional.only(bottom: 1.0, end: 1.0),
-                child: CircleAvatar(
-                  radius: 9.5,
-                  backgroundColor: Colors.white,
-                ),
+              SizedBox(
+                height: 5.0,
               ),
-              Padding(
-                padding:
-                const EdgeInsetsDirectional.only(bottom: 2.0, end: 2.0),
-                child: CircleAvatar(
-                  radius: 8.0,
-                  backgroundColor: Colors.green,
+              Text(
+                "Eng. Mohamed Menem",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
                 ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            "Eng. Mohamed Menem",
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 
 }
