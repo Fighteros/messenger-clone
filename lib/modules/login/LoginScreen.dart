@@ -1,11 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:messenger_mini_clone/shared/components/components.dart';
 import 'package:messenger_mini_clone/shared/cubit/cubit.dart';
 import 'package:messenger_mini_clone/shared/cubit/states.dart';
+
+// validators are meaningless and if removed would be better since we validate
+// that the form isn't empty using active btn only when form isn't empty
 
 class LoginScreen extends StatelessWidget {
   var emailOrPhoneController = TextEditingController();
@@ -90,7 +91,13 @@ class LoginScreen extends StatelessWidget {
                               titleText: 'LOG IN',
                               color: Colors.grey[300],
                             )
-                          : getDefaultButton(titleText: 'LOG IN'),
+                          : getDefaultButton(
+                              titleText: 'LOG IN',
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.getChatScreen(context);
+                                }
+                              }),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: getDefaultButton(

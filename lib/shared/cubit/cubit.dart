@@ -13,8 +13,8 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   late Database database;
 
-  late bool isEmailEmpty;
-  late bool isPasswordEmpty;
+   bool isEmailEmpty = true;
+   bool isPasswordEmpty =  true;
 
   bool isLoginBtnDisabled = true;
 
@@ -56,5 +56,11 @@ class AppCubit extends Cubit<AppStates> {
         ? true
         : false;
     emit(AppLoginBtnValidateState());
+  }
+
+  void getChatScreen(context) {
+    // Navigator.pushReplacementNamed(context, "/home");
+    currentIndex = 1;
+    emit(AppChatsState());
   }
 }
