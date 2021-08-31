@@ -8,6 +8,5 @@ class AppLoginState extends AppStates {}
 
 class AppChatsState extends AppStates {}
 
+
 class AppLoginBtnValidateState extends AppStates {}
-
-

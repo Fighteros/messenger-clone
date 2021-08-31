@@ -63,4 +63,5 @@ class AppCubit extends Cubit<AppStates> {
     currentIndex = 1;
     emit(AppChatsState());
   }
+
 }
