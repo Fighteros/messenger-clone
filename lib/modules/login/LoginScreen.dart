@@ -1,24 +1,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger_mini_clone/shared/components/components.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+class LoginScreen extends StatelessWidget {
 
-class _LoginScreenState extends State<LoginScreen> {
   var emailOrPhoneController = TextEditingController();
   var passwordController = TextEditingController();
 
   bool isLoginBtnDisabled = true;
 
-  var activeLoginBtn;
 
-  var inActiveLoginBtn;
-
-  @override
-  void initState() {
+  //@override
+  /*void initState() {
     super.initState();
     activeLoginBtn = Container(
       decoration: BoxDecoration(
@@ -60,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
             : false;
       });
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -82,27 +76,22 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 35.0,
               ),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {});
-                },
-                keyboardType: TextInputType.emailAddress,
+              getDefaultTextFormField(
                 controller: emailOrPhoneController,
-                decoration: InputDecoration(
-                  hintText: "Phone Number or Email",
-                ),
+                hintText:  "Phone Number or Email",
+                onChanged: (value){} ,
+                keyboardType: TextInputType.emailAddress
               ),
               SizedBox(
                 height: 15.0,
               ),
-              TextFormField(
-                onChanged: (value) => {setState(() {})},
-                controller: passwordController,
+              getDefaultTextFormField(
+                controller: passwordController ,
+                hintText:  "Password",
+                keyboardType:TextInputType.visiblePassword,
+                onChanged: (value) {},
                 obscureText: true,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration.collapsed(
-                  hintText: "Password",
-                ),
+                isCollapsed: true
               ),
               SizedBox(
                 height: 25.0,
@@ -111,48 +100,30 @@ class _LoginScreenState extends State<LoginScreen> {
               // prefix it will 0xff
               // here is the Login Button place
               // login button
-              if (isLoginBtnDisabled) inActiveLoginBtn else activeLoginBtn,
+              // if (isLoginBtnDisabled) inActiveLoginBtn else activeLoginBtn,
+              isLoginBtnDisabled?  getDefaultButton(
+                titleText: 'LOG IN',
+                color: Colors.grey[300],
+              ): getDefaultButton(
+                titleText: 'LOG IN'
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 12,
+                  vertical: 12.0
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: Colors.grey[200],
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  height: 40.0,
-                  width: double.infinity,
-                  child: MaterialButton(
-                    onPressed: () {},
-                    child: Text(
-                      "CREATE NEW ACCOUNT",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0),
-                    ),
-                  ),
+                child: getDefaultButton(
+                  color: Colors.grey[200],
+                  titleText: "CREATE NEW ACCOUNT",
+                  fontWeight: FontWeight.bold,
+                  onPressed: () {},
+                  fontColor: Colors.black,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: Colors.transparent),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                height: 30.0,
-                width: double.infinity,
-                child: MaterialButton(
-                  onPressed: () {},
-                  child: Text(
-                    "FORGET PASSWORD",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13.0),
-                  ),
-                ),
+              getDefaultButton(
+                  titleText:  "FORGET PASSWORD",
+                color:  Colors.transparent,
+                fontColor: Colors.black,
+                onPressed: () {},
               ),
             ],
           ),
