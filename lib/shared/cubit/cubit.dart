@@ -13,6 +13,11 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   late Database database;
 
+  late bool isEmailEmpty;
+  late bool isPasswordEmpty;
+
+  bool isLoginBtnDisabled = true;
+
   List<Widget> screens = [LoginScreen(), ChatsScreen(), SingleChatScreen()];
 
   AppCubit() : super(AppInitialState());
@@ -42,5 +47,14 @@ class AppCubit extends Cubit<AppStates> {
   void getLoginScreen(int index) {
     currentIndex = index;
     emit(AppLoginState());
+  }
+
+  void validateLoginButton() {
+    isLoginBtnDisabled = ((isEmailEmpty && isPasswordEmpty) ||
+            (isEmailEmpty) ||
+            (isPasswordEmpty))
+        ? true
+        : false;
+    emit(AppLoginBtnValidateState());
   }
 }

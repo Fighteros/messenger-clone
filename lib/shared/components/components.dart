@@ -12,8 +12,8 @@ Widget getDefaultButton({
 }) =>
     Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: color,
+        borderRadius: BorderRadius.circular(12.0),
+        color: color,
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       height: 40.0,
@@ -32,12 +32,14 @@ Widget getDefaultButton({
 Widget getDefaultTextFormField({
   required TextEditingController controller,
   required String hintText,
+  required Function(String? val) validator,
   Function(dynamic val)? onChanged,
   TextInputType? keyboardType,
   bool obscureText = false,
   bool isCollapsed = false,
 }) =>
     TextFormField(
+      validator: (value) => validator(value),
       obscureText: obscureText,
       onChanged: onChanged,
       keyboardType: keyboardType,
